@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0 user-scalable=no">
+</head>
+<style>
+.board{
+	width:300px;
+	height:600px;
+	background-color:lightblue;
+}
+</style>
+<body>
+	<p>这是画板，请用手指进行触摸操作</p>
+	<canvas id = "touchView" class = "board">
+		
+	</canvas>
+	
+	<!--<script type="text/javascript" src="public/javascripts/jquery.js"></script>-->
+	<script type="text/javascript" src="javascripts/libs/pressure.min.js"></script>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <!--<script type="text/javascript" src="javascripts/libs//jquery.pressure.min.js"></script>-->
+	<script type="text/javascript" src="javascripts/libs/mult_touch.js"></script>
+	<script type="text/javascript" src="javascripts/libs/img_client.js"></script>
+	<script type="text/javascript" src="javascripts/main.js"></script>
+</body>
+</html>
