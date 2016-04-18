@@ -8,24 +8,24 @@ if(!mult_touch){
 	}
 }
 var img_client = {
-	touchEvent: function (canvas, socket, touchMsg) {
+	touchEvent: function (canvas, socket) {
 		canvas.addEventListener(mult_touch.bindevent.down, function(e) {
 
-			socket.emit("down",touchMsg);
+			socket.emit("down",mult_touch.msg);
 
 		},false);
 		canvas.addEventListener(mult_touch.bindevent.move, function(e) {
 
-			socket.emit("move",touchMsg);
+			socket.emit("move",mult_touch.msg);
 
 		},false);
 		canvas.addEventListener(mult_touch.bindevent.up, function(e) {
 
-			socket.emit("up",touchMsg);
+			socket.emit("up",mult_touch.msg);
 
 		},false);
 	},
-	mouseEvent: function (canvas, socket, touchMsg) {
+	mouseEvent: function (canvas, socket) {
 		var mouse = {};
 		var mouseStatus = {
 			down: "d",
@@ -41,7 +41,7 @@ var img_client = {
 		}
 		canvas.addEventListener(mult_touch.bindevent.down, function(e) {
 			changeStatus(e,mouseStatus.down);
-			socket.emit("down",touchMsg);
+			socket.emit("down",mult_touch.msg);
 			console.log('d');
 
 		},false);
@@ -51,7 +51,7 @@ var img_client = {
 				if (mouse.x !== e.clientX && mouse.y !== e.clientY) {
 
 					changeStatus(e,mouseStatus.down);
-					socket.emit("move",touchMsg);
+					socket.emit("move",mult_touch.msg);
 					console.log('m');
 				}
 			}
@@ -60,23 +60,22 @@ var img_client = {
 
 			changeStatus(e, mouseStatus.down);
 			mouse.status = undefined;
-			socket.emit("up", touchMsg);
+			socket.emit("up", mult_touch.msg);
 			console.log('u');
 		},false);
 	},
-	init: function(target, touchMsg){
+	init: function(target){
 		'use strict'
 		/***********************/
 		//connect socket server
 		var socket = io.connect();
-
 		/***********************/
 		var canvas = target;
 		var c_width = canvas.clientWidth;
 		if("ontouchstart" in document)
-			this.touchEvent(canvas, socket, touchMsg);
+			this.touchEvent(canvas, socket);
 		else
-			this.mouseEvent(canvas, socket, touchMsg);
+			this.mouseEvent(canvas, socket);
 		/***********************/
 
 		//init img object

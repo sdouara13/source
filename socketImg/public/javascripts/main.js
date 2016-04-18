@@ -11,7 +11,7 @@ $(document).ready(function () {
 	canvas.height = c_width;
 	canvas.style.height = c_width + 'px';
 	mult_touch.init(id);
-	img_client.init(canvas, mult_touch.msg);
+	img_client.init(canvas);
 	var range =  $('#range').val();
 	$('#range').on(mult_touch.bindevent.move, function (e) {
 			if (range !== $('#range').val()) {

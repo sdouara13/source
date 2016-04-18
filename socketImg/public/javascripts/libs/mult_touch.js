@@ -11,7 +11,7 @@ var mult_touch = {
 		return this._touchMsg;
 	},
 	_touchMsg: null,
-	_pressure:null,
+	_pressure:0,
 	addEvent:function(dom,type,fn){
 		//attach event
 		if(dom.addEventListener){
@@ -43,6 +43,7 @@ var mult_touch = {
 		var block = {
 		  start: function(event){
 			//console.log('start', event);
+			  //mult_touch._pressure = 0;
 		  },
 
 		  change: function(force, event){
@@ -51,7 +52,7 @@ var mult_touch = {
 			//this.innerHTML = force;
 			//console.log('change', force);
 			mult_touch._pressure = parseInt(force * 100);
-			
+
 		  },
 
 		  startDeepPress: function(event){
