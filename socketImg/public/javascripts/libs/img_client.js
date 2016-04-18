@@ -86,13 +86,15 @@ var img_client = {
 			draw_x,
 			draw_y,
 			zoom,
+			zoom_w,
+			zoom_h,
 			myctx;
 		var drawImg = function (img, canvas, w) {
 			//console.log('draw img');
 			myctx = canvas.getContext("2d");
 			myctx.clearRect(0, 0, w, w);
 			getZoomSize(img, c_width);
-			myctx.drawImage(img, 0, 0, img_w, img_h, draw_x, draw_y, img_w * zoom, img_h * zoom);
+			myctx.drawImage(img, 0, 0, img_w, img_h, draw_x, draw_y, zoom_w, zoom_h);
 			console.log("sourceX: 0 sourceY: 0 sourceWidth: "+img_w+" sourceHeight: "+img_h+" destX: "+draw_x+" destY: "+draw_y+" destWidth: "+img_w * zoom + " destHeight: "+ img_h * zoom);
 		};
 		function getZoomSize(img, c_width) {
@@ -100,11 +102,15 @@ var img_client = {
 			img_h = img.height;
 			if(img_w > img_h) {
 				zoom = c_width / img_w;
+				zoom_w = c_width;
+				zoom_h = c_width / img_w * img_h;
 				draw_x = 0;
 				draw_y = (c_width - img_h * zoom) * 0.5;
 			}
 			else {
 				zoom = c_width / img_h;
+				zoom_h = c_width;
+				zoom_w = c_width / img_h * img_w;
 				draw_y = 0;
 				draw_x = (c_width - img_w * zoom) * 0.5;
 			}
