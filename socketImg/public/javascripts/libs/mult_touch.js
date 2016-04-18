@@ -105,10 +105,14 @@ var mult_touch = {
 		//pressure by jquery
 		//$('#'+target_id).pressure(block);
 
-		if("ontouchstart" in document)
+		if("ontouchstart" in document) {
 			this.touchEvent(touchList, finger_status, canvas);
-		else
+			console.log('touch');
+		}
+		else {
 			this.mouseEvent(touchList, finger_status, canvas);
+			console.log('mouse');
+		}
 	},
 	touchEvent: function(touchList, finger_status, canvas) {
 		

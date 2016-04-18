@@ -72,8 +72,7 @@ var img_client = {
 
 		/***********************/
 		var canvas = target;
-
-
+		var c_width = canvas.clientWidth;
 		if("ontouchstart" in document)
 			this.touchEvent(canvas, socket, touchMsg);
 		else
@@ -82,27 +81,47 @@ var img_client = {
 
 		//init img object
 		var img =  new Image();
-		var drawImg = function (img, canvas) {
+		var img_w,
+			img_h,
+			draw_x,
+			draw_y,
+			zoom,
+			myctx;
+		var drawImg = function (img, canvas, w) {
 			//console.log('draw img');
-			var myctx = canvas.getContext("2d");
-
-			myctx.drawImage(img, 0, 0);
-
+			myctx = canvas.getContext("2d");
+			myctx.clearRect(0, 0, w, w);
+			getZoomSize(img, c_width);
+			myctx.drawImage(img, 0, 0, img_w, img_h, draw_x, draw_y, img_w * zoom, img_h * zoom);
+			console.log("sourceX: 0 sourceY: 0 sourceWidth: "+img_w+" sourceHeight: "+img_h+" destX: "+draw_x+" destY: "+draw_y+" destWidth: "+img_w * zoom + " destHeight: "+ img_h * zoom);
 		};
-
+		function getZoomSize(img, c_width) {
+			img_w = img.width;
+			img_h = img.height;
+			if(img_w > img_h) {
+				zoom = c_width / img_w;
+				draw_x = 0;
+				draw_y = (c_width - img_h * zoom) * 0.5;
+			}
+			else {
+				zoom = c_width / img_h;
+				draw_y = 0;
+				draw_x = (c_width - img_w * zoom) * 0.5;
+			}
+		}
 		//get socket data
 		function getImageData(message,img) {
 
 			img.src = 'data:img/jpeg;base64, ' + message.data;
+
 			if(img.complete){
 
-			   drawImg(img, canvas);
+			   drawImg(img, canvas,c_width);
 
 			}else{
-
 			   img.onload = function(){
-
-				 drawImg(img, canvas);
+				 zoom = getZoomSize(img, c_width);
+				 drawImg(img, canvas,c_width);
 
 			   };
 
