@@ -1,18 +1,26 @@
-(function(mult_touch,img_client){
+$(document).ready(function () {
 	'use strict'
 	/***********************/
-	
-	mult_touch.init("touchView");
-	//console.log(mult_touch.msg());
-	var canvas = document.getElementById("touchView");
+	//alert('ready:'+document.getElementById('touchView').clientWidth );
+
+	var id = "touchView";
+	var canvas = document.getElementById(id);
+	var c_width = canvas.clientWidth;
+	var c_height = canvas.clientheight;
+	mult_touch.init(id);
 	img_client.init(canvas, mult_touch.msg);
-	/*canvas.addEventListener(mult_touch.bindevent.down, function(e) {
-		canvas.innerHTML = mult_touch.msg;
-	},false);
-	canvas.addEventListener(mult_touch.bindevent.move, function(e) {
-		canvas.innerHTML = mult_touch.msg;
-	},false);
-	canvas.addEventListener(mult_touch.bindevent.up, function(e) {
-		canvas.innerHTML = mult_touch.msg;
-	},false);*/
-}(mult_touch,img_client));
+	$('#range').on(mult_touch.bindevent.move, function (e) {
+		//console.log( $('#range').val());
+		var percent =  $('#range').val() * 0.01;
+		canvas.style.transform = 'scale('+percent+','+percent+')';
+		/*canvas.style.width = c_width + 'px';
+		canvas.style.height = c_height + 'px';*/
+		}
+	);
+	/**********************/
+
+});
+
+window.onload = function () {
+	//alert('onload+'+document.getElementById('touchView').clientWidth);
+}

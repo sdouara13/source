@@ -3,21 +3,68 @@
 <head>
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0 user-scalable=no">
+	<link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <style>
-.board{
-	width:300px;
-	height:600px;
-	background-color:lightblue;
-}
+	#range {
+		width: 80%;
+		height: 10px;
+		background: rgba(60, 114, 230, .8);
+		margin:10px 0 15px 0;
+		-webkit-border-radius: 5px;
+		-webkit-appearance: none !important;
+	}
+
+	#range::-webkit-slider-thumb{
+		width: 28px;
+		height: 28px;
+
+		background: -webkit-gradient(
+				linear,
+				left top,
+				left bottom,
+				from(#fff),
+				to(#ccc)
+		);
+
+		border: 1px solid #000;
+		-webkit-box-shadow: 0 0 6px #000;
+		-webkit-border-radius: 14px;
+		-webkit-appearance: none !important;
+	}
+	.slider-container{
+		width:100%;
+	}
+	.slider-container *{
+		float:left;
+	}
+	.slider-block{
+		width:10%;
+		margin:5px 0 0 0 ;
+		text-align: center;
+	}
+	.canvas_container{
+
+	}
+	.canvas{
+		padding:50px 50px 0 50px;
+		margin:auto;
+		background-color:lightblue;
+	}
 </style>
 <body>
-	<p>这是画板，请用手指进行触摸操作</p>
-	<canvas id = "touchView" class = "board">
-		
+	<p>拖动滑块进行缩放：</p>
+	<div class = 'slider-container'>
+		<p class = 'slider-block'>50%</p><input type = 'range' min="50" max="100" value = '100' id = range /><p class = 'slider-block'>100%</p>
+	</div>
+	<br>
+	<br>
+	<p>这是画板，请用手指进行触摸操作:</p>
+	<div class = 'canvas_container'>
+	<canvas id = "touchView" class = "canvas">
 	</canvas>
-	
-	<!--<script type="text/javascript" src="public/javascripts/jquery.js"></script>-->
+	</div>
+	<script type="text/javascript" src="javascripts/libs/jquery.js"></script>
 	<script type="text/javascript" src="javascripts/libs/pressure.min.js"></script>
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <!--<script type="text/javascript" src="javascripts/libs//jquery.pressure.min.js"></script>-->

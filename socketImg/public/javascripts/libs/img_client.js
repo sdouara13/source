@@ -1,3 +1,12 @@
+if(!mult_touch){
+	var mult_touch = {
+		bindevent: {
+			down: "ontouchstart" in document ? "touchstart" : "mousedown",
+			move: "ontouchmove" in document ? "touchmove" : "mousemove",
+			up: "ontouchend" in document ? "touchend" : "mouseup"
+		}
+	}
+}
 var img_client = {
 	touchEvent: function (canvas, socket, touchMsg) {
 		canvas.addEventListener(mult_touch.bindevent.down, function(e) {
