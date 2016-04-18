@@ -95,7 +95,7 @@ var img_client = {
 			myctx.clearRect(0, 0, w, w);
 			getZoomSize(img, c_width);
 			myctx.drawImage(img, 0, 0, img_w, img_h, draw_x, draw_y, zoom_w, zoom_h);
-			console.log("sourceX: 0 sourceY: 0 sourceWidth: "+img_w+" sourceHeight: "+img_h+" destX: "+draw_x+" destY: "+draw_y+" destWidth: "+img_w * zoom + " destHeight: "+ img_h * zoom);
+			//console.log("sourceX: 0 sourceY: 0 sourceWidth: "+img_w+" sourceHeight: "+img_h+" destX: "+draw_x+" destY: "+draw_y+" destWidth: "+img_w * zoom + " destHeight: "+ img_h * zoom);
 		};
 		function getZoomSize(img, c_width) {
 			img_w = img.width;
