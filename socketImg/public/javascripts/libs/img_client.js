@@ -70,7 +70,7 @@ var img_client = {
 		//connect socket server
 		var socket = io.connect();
 		/***********************/
-		var canvas = target;
+		var canvas = document.getElementById(target);
 		var c_width = canvas.clientWidth;
 		if("ontouchstart" in document)
 			this.touchEvent(canvas, socket);
@@ -117,8 +117,8 @@ var img_client = {
 		//get socket data
 		function getImageData(message,img) {
 
-			img.src = 'data:img/jpeg;base64, ' + message.data;
-
+			img.src = 'data:img/jpeg;base64, ' + message;
+			//console.log(message);
 			if(img.complete){
 
 			   drawImg(img, canvas,c_width);

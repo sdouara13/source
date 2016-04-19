@@ -7,38 +7,22 @@ server.on('connection',function(socket){   // server listening
 
 	socket.on("down",function(msg){
 		//console.log(msg);
+		var array = msg.split("\n")[0].split(' ');
 		var str;
-		str = {
-			data: JSON.parse(fs.readFileSync('./imgData/imgDown.json'))
-		}
+		//console.log(array[4]);
+		str = fs.readFileSync('./imgData/txt/(' + array[4] + ').txt');
 		//console.log('str:'+str['data']);
-		socket.emit("imgData",str['data']);
+		socket.emit("imgData",str.toString());
 	});
 	socket.on("move",function(msg){
 		var array = msg.split("\n")[0].split(' ');
 		var str;
-		if(parseInt(array[4]) < 20) {
-			str = {
-				data: JSON.parse(fs.readFileSync('./imgData/imgMove0.json'))
-			}
-		}
-		else if(parseInt(array[4]) < 50){
-			str = {
-				data: JSON.parse(fs.readFileSync('./imgData/imgMove1.json'))
-			}
-		}
-		else {
-			str = {
-				data: JSON.parse(fs.readFileSync('./imgData/imgMove2.json'))
-			}
-		}
-		socket.emit("imgData",str['data']);
+		str = fs.readFileSync('./imgData/txt/(' + array[4] + ').txt');
+		socket.emit("imgData",str.toString());
 	});
 	socket.on("up",function(msg){
-		var str = {
-			data:JSON.parse(fs.readFileSync('./imgData/imgUp.json'))
-		}
-		socket.emit("imgData",str['data']);
+		var str = fs.readFileSync('./imgData/txt/(' + parseInt(100*Math.random()) + ').txt');
+		socket.emit("imgData",str.toString());
 	});
 
 
