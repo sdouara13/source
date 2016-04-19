@@ -7,6 +7,41 @@ if(!mult_touch){
 		}
 	}
 }
+var intervalID = -1;
+var renderingLoop;
+var QueueNewFrame = function () {
+
+	if (window.requestAnimationFrame)
+
+		window.requestAnimationFrame(renderingLoop);
+
+	else if (window.msRequestAnimationFrame)
+
+		window.msRequestAnimationFrame(renderingLoop);
+
+	else if (window.webkitRequestAnimationFrame)
+
+		window.webkitRequestAnimationFrame(renderingLoop);
+
+	else if (window.mozRequestAnimationFrame)
+
+		window.mozRequestAnimationFrame(renderingLoop);
+
+	else if (window.oRequestAnimationFrame)
+
+		window.oRequestAnimationFrame(renderingLoop);
+
+	else {
+
+		QueueNewFrame = function () {
+
+		};
+
+		intervalID = window.setInterval(renderingLoop, 16.7);
+
+	}
+
+};
 var img_client = {
 	touchEvent: function (canvas, socket) {
 		canvas.addEventListener(mult_touch.bindevent.down, function(e) {
@@ -88,12 +123,20 @@ var img_client = {
 			zoom_w,
 			zoom_h,
 			myctx;
+		renderingLoop = function () {
+
+			myctx.drawImage(img, 0, 0, img_w, img_h, draw_x, draw_y, zoom_w, zoom_h);
+
+			QueueNewFrame();
+
+		};
 		var drawImg = function (img, canvas, w) {
 			//console.log('draw img');
 			myctx = canvas.getContext("2d");
 			myctx.clearRect(0, 0, w, w);
 			getZoomSize(img, c_width);
-			myctx.drawImage(img, 0, 0, img_w, img_h, draw_x, draw_y, zoom_w, zoom_h);
+
+			renderingLoop();
 			//console.log("sourceX: 0 sourceY: 0 sourceWidth: "+img_w+" sourceHeight: "+img_h+" destX: "+draw_x+" destY: "+draw_y+" destWidth: "+img_w * zoom + " destHeight: "+ img_h * zoom);
 		};
 		function getZoomSize(img, c_width) {

@@ -51,8 +51,8 @@ var mult_touch = {
 			//this.style.width = Pressure.map(force, 0, 1, 300, 400) + 'px';
 			//this.innerHTML = force;
 			//console.log('change', force);
-			mult_touch._pressure = parseInt(force * 100);
-
+			mult_touch._pressure = (force * 100) >> 0;
+			//console.log(mult_touch._pressure);
 		  },
 
 		  startDeepPress: function(event){
