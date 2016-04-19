@@ -14,16 +14,14 @@ var mult_touch = {
 	_pressure:0,
 	addEvent:function(dom,type,fn){
 		//attach event
-		if(dom && typeof dom === 'object') {
-			if (dom.addEventListener) {
-				dom.addEventListener(type, fn, false);
-			}
-			else if (dom.attachEvent) {
-				dom.attachEvent('on' + type, fn);
-			}
-			else {
-				dom['on' + type] = fn;
-			}
+		if(dom.addEventListener){
+			dom.addEventListener(type,fn,false);
+		}
+		else if(dom.attachEvent){
+			dom.attachEvent('on'+type,fn);
+		}
+		else{
+			dom['on' + type] = fn;
 		}
 	},
 	bindevent: {
@@ -32,20 +30,7 @@ var mult_touch = {
 		up: "ontouchend" in document ? "touchend" : "mouseup"
 	},
 	init: function(target_id){
-		/*
-		*
-		* Before use pressure function you should lead the pressure.js into files.
-		*
-		* */
 		//pressure config
-		var Pressure = Pressure || {
-				config: function (object) {
-					
-				},
-				set: function (target, func, config) {
-					
-				}
-			}
 		Pressure.config({
 		  polyfill: true
 		});
@@ -104,7 +89,6 @@ var mult_touch = {
 
 		//show debug message
 		var printMsg = function(target) {
-			var target = target || document.body;
 			var str = "msg: ";
 			var finger;
 			for(var i in touchList) {
@@ -293,7 +277,7 @@ var mult_touch = {
 			e.preventDefault();
 			pushList(e,finger_status.down);
 			mult_touch._touchMsg = sendTouchMsg();
-			//console.log('mouse down');
+			//console.log('d');
 		});
 		
 		//touch move event
@@ -305,7 +289,7 @@ var mult_touch = {
 				if(touchList['mouseclick'].x !== e.clientX && touchList['mouseclick'].y !== e.clientY){
 					
 						pushList(e, finger_status.move);
-						//console.log('mouse move');
+						//console.log('m');
 				}
 				mult_touch._touchMsg = sendTouchMsg();
 			}
@@ -316,7 +300,7 @@ var mult_touch = {
 			e.preventDefault();
 			pushList(e, finger_status.up);
 			mult_touch._touchMsg = sendTouchMsg();
-			//console.log('mouse up');
+			//console.log('u');
 		});
 		
 	}

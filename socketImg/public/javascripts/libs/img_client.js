@@ -118,7 +118,7 @@ var img_client = {
 		function getImageData(message,img) {
 
 			img.src = 'data:img/jpeg;base64, ' + message;
-			//console.log(message);
+
 			if(img.complete){
 
 			   drawImg(img, canvas,c_width);
