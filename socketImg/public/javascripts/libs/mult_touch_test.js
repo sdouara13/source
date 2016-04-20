@@ -27,6 +27,7 @@ describe('mult_touch test', function() {
         if(mult_touch.msg !== null)
         console.log(mult_touch.msg);
       });
+      //expect(mult_touch.msg).toBe();
   });
 
   /*afterEach(function () {

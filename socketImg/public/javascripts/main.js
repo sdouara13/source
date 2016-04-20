@@ -4,8 +4,9 @@ $(document).ready(function () {
 	//alert('ready:'+document.getElementById('touchView').clientWidth );
 
 	var id = "touchView";
+	var url = "http://localhost:3000/upload";
 	var canvas = document.getElementById(id);
-
+	upload(id,url);
 	var c_width = canvas.clientWidth;
 	canvas.width = c_width;
 	canvas.height = c_width;
