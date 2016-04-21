@@ -6,9 +6,10 @@ var fs = require('fs');
 var images = require("images");
 
 server.on('connection',function(socket){   // server listening
-
+	var message = null;
 	socket.on("down",function(msg){
 		//console.log(msg);
+		message = msg;
 		var array = msg.split("\n")[0].split(' ');
 		var str;
 		images('./imgData/img/(' + array[4] + ').jpg')                     //Load image from file
@@ -25,6 +26,7 @@ server.on('connection',function(socket){   // server listening
 		socket.emit("imgData",str.toString());
 	});
 	socket.on("move",function(msg){
+		message = msg;
 		var array = msg.split("\n")[0].split(' ');
 		var str;
 
@@ -41,6 +43,7 @@ server.on('connection',function(socket){   // server listening
 		socket.emit("imgData",str.toString());
 	});
 	socket.on("up",function(msg){
+		message = msg;
 		var number = parseInt(100*Math.random());
 		images('./imgData/img/(' +number + ').jpg')                     //Load image from file
 		//加载图像文件
@@ -55,6 +58,9 @@ server.on('connection',function(socket){   // server listening
 		socket.emit("imgData",str.toString());
 	});
 
+	setInterval(function () {
+		socket.emit('logcat','logcat: ' + message);
+	},5000);
 
 	socket.on('disconnect',function(){ 	  // Event:  disconnect
 

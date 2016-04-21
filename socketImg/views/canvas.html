@@ -6,6 +6,21 @@
 	<link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <style>
+	.phoneBox{
+		background-image:url(stylesheets/img/phone.png);
+		background-repeat:no-repeat;
+		width:270px;
+		margin:auto;
+		padding:50px 0 250px 0;
+	}
+	.phoneBox #touchView{
+		width:250px;
+		margin:100px 9px 0 11px;
+	}
+	.wrap{
+		max-width:1080px;
+		margin:auto;
+	}
 	#range {
 		width: 80%;
 		height: 10px;
@@ -43,26 +58,49 @@
 		margin:5px 0 0 0 ;
 		text-align: center;
 	}
-	.canvas_container{
-
-	}
 	.canvas{
 		margin:auto;
 		background-color:lightblue;
 		width:100%;
 	}
+	#uploadMenu{
+		position: absolute;
+		margin:160px 34px 0 36px;
+		width:200px;
+		border:1px solid #ccc;
+		border-radius: 5px;
+		z-index: 99;
+		background-color:#fff;
+	}
+	#uploadMenu div{
+		border:1px solid #ccc;
+	}
+	#uploadMenu button{
+		float:right;
+	}
+	#uploadMenu input[type='checkbox']{
+		float:right;
+	}
+	#fileList{
+		height:80px;
+		overflow: auto;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+	}
 </style>
 <body>
-	<p>拖动滑块进行缩放：</p>
-	<div class = 'slider-container'>
-		<p class = 'slider-block'>50%</p><input type = 'range' min="50" max="100" value = '100' id = range /><p class = 'slider-block'>100%</p>
-	</div>
-	<br>
-	<br>
-	<p>这是画板，请用手指进行触摸操作:</p>
-	<div class = 'canvas_container'>
-	<canvas id = "touchView" class = "canvas">
-	</canvas>
+	<div class = 'wrap' id = 'container'>
+		<p>拖动滑块进行缩放：</p>
+		<div class = 'slider-container'>
+			<p class = 'slider-block'>50%</p><input type = 'range' min="50" max="100" value = '100' id = range /><p class = 'slider-block'>100%</p>
+		</div>
+		<br>
+		<br>
+		<p>淡蓝色区域是画板，拖动文件到该区域可以上传，请用手指进行触摸操作:</p>
+		<div class = 'canvas_container' id = 'canvas_box'>
+		<canvas id = "touchView" class = "canvas">
+		</canvas>
+		</div>
 	</div>
 	<script type="text/javascript" src="javascripts/libs/jquery.js"></script>
 	<script type="text/javascript" src="javascripts/libs/pressure.min.js"></script>
@@ -70,7 +108,9 @@
     <!--<script type="text/javascript" src="javascripts/libs//jquery.pressure.min.js"></script>-->
 	<script type="text/javascript" src="javascripts/libs/mult_touch.js"></script>
 	<script type="text/javascript" src="javascripts/libs/img_client.js"></script>
+	<script type="text/javascript" src="javascripts/libs/logcat.js"></script>
 	<script type="text/javascript" src="javascripts/libs/upload.js"></script>
 	<script type="text/javascript" src="javascripts/main.js"></script>
+
 </body>
 </html>

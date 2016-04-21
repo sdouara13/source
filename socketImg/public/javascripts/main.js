@@ -6,13 +6,25 @@ $(document).ready(function () {
 	var id = "touchView";
 	var url = "http://localhost:3000/upload";
 	var canvas = document.getElementById(id);
-	upload(id,url);
+	var socket = io.connect();
+	//如果在pc上打开网页
+	if(!("ontouchstart" in document)) {
+		var wrap = document.getElementById('container');
+		wrap.style.width = '270px';
+		document.getElementById('canvas_box').setAttribute('class', 'phoneBox');
+		//绑定文件上传功能
+		upload(id, url);
+	}
 	var c_width = canvas.clientWidth;
 	canvas.width = c_width;
 	canvas.height = c_width;
 	canvas.style.height = c_width + 'px';
+
+
 	mult_touch.init(id);
-	img_client.init(id);
+	img_client.init(id, socket);
+	logcat(socket);
+
 	var range =  $('#range').val();
 	$('#range').on(mult_touch.bindevent.move, function (e) {
 			if (range !== $('#range').val()) {

@@ -77,7 +77,7 @@ var img_client = {
 		canvas.addEventListener(mult_touch.bindevent.down, function(e) {
 			changeStatus(e,mouseStatus.down);
 			socket.emit("down",mult_touch.msg);
-			console.log('d');
+			//console.log('d');
 
 		},false);
 		canvas.addEventListener(mult_touch.bindevent.move, function(e) {
@@ -87,7 +87,7 @@ var img_client = {
 
 					changeStatus(e,mouseStatus.down);
 					socket.emit("move",mult_touch.msg);
-					console.log('m');
+					//console.log('m');
 				}
 			}
 		},false);
@@ -96,14 +96,14 @@ var img_client = {
 			changeStatus(e, mouseStatus.down);
 			mouse.status = undefined;
 			socket.emit("up", mult_touch.msg);
-			console.log('u');
+			//console.log('u');
 		},false);
 	},
-	init: function(target){
+	init: function(target, socket){
 		'use strict'
 		/***********************/
 		//connect socket server
-		var socket = io.connect();
+		//var socket = io.connect();
 		/***********************/
 		var canvas = document.getElementById(target);
 		var c_width = canvas.clientWidth;
