@@ -4,7 +4,7 @@ $(document).ready(function () {
 	//alert('ready:'+document.getElementById('touchView').clientWidth );
 
 	var id = "touchView";
-	var url = "http://localhost:3000/upload";
+	var url = "http://10.20.105.6:3000/upload";
 	var canvas = document.getElementById(id);
 	var socket = io.connect();
 	//如果在pc上打开网页
